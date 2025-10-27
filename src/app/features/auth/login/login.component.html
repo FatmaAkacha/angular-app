@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Connexion</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Entrez votre email"
+        />
+        <small class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Veuillez entrer un email valide
+        </small>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="form.invalid">Se connecter</button>
+      </div>
+    </form>
+
+  </div>
+</div>

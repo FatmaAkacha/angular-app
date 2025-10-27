@@ -1,0 +1,73 @@
+<div class="task-form-card">
+  <h2>{{ taskToEdit ? 'Modifier une tâche' : 'Nouvelle tâche' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <!-- Titre -->
+    <div class="form-group">
+      <label for="titre">Titre <i style="color: red;">*</i></label>
+      <input
+        id="titre"
+        type="text"
+        formControlName="titre"
+        placeholder="Entrez le titre de la tâche"
+      />
+      <small class="error" *ngIf="form.get('titre')?.touched && form.get('titre')?.invalid">
+        Le titre est obligatoire (min. 2 caractères)
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="userEmail">Email</label>
+    <textarea
+    id="userEmail"
+    formControlName="email"
+    placeholder="Saisir votre email"
+    rows="3"
+    ></textarea>
+    </div>
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Ajoutez une description (facultatif)"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <!-- Priorité -->
+    <div class="form-group">
+      <label for="priorite">Priorité (1 à 5)</label>
+      <input
+        id="priorite"
+        type="number"
+        formControlName="priorite"
+        min="1"
+        max="5"
+      />
+      <small class="error" *ngIf="form.get('priorite')?.touched && form.get('priorite')?.invalid">
+        La priorité doit être comprise entre 1 et 5
+      </small>
+    </div>
+
+    <!-- Date d’échéance -->
+    <div class="form-group">
+      <label for="dueDate">Date d’échéance</label>
+      <input
+        id="dueDate"
+        type="date"
+        formControlName="dueDate"
+      />
+    </div>
+
+    <!-- Boutons -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="form.invalid">
+        {{ taskToEdit ? 'Mettre à jour' : 'Ajouter' }}
+      </button>
+      <button type="button" class="cancel-btn" (click)="form.reset({ priorite: 3 })">
+        Annuler
+      </button>
+    </div>
+  </form>
+</div>

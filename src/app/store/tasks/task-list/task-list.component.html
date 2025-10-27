@@ -1,0 +1,42 @@
+<div class="task-list-container">
+  <h2>Mes tâches</h2>
+
+  <!-- Bouton pour ajouter une nouvelle tâche -->
+  <div class="header-actions">
+    <button routerLink="/add-task" class="add-btn">➕ Ajouter une tâche</button>
+  </div>
+
+  <!-- Liste des tâches -->
+  <div *ngIf="(tasks$ | async) as tasks; else noTasks">
+    <div *ngIf="tasks.length > 0; else noTasks">
+      <ul class="task-list">
+        <li *ngFor="let task of tasks" [class.completed]="task.completed">
+          <div class="task-content">
+            <div>
+              <h3>{{ task.titre }}</h3>
+              <p class="description" *ngIf="task.description">{{ task.description }}</p>
+              <p class="meta">
+                <span class="priority">Priorité : {{ task.priorite }}</span>
+                <span *ngIf="task.dueDate" class="due-date">
+                  ⏰ Échéance : {{ task.dueDate | date: 'dd/MM/yyyy' }}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="task-actions">
+            <button (click)="toggle(task.id)">
+              {{ task.completed ? '↩️ Reprendre' : '✅ Terminer' }}
+            </button>
+            <button class="delete-btn" (click)="delete(task.id)">🗑️ Supprimer</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Message si aucune tâche -->
+  <ng-template #noTasks>
+    <p class="empty-state">Aucune tâche pour le moment</p>
+  </ng-template>
+</div>

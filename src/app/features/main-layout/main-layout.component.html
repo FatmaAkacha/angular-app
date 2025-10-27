@@ -1,0 +1,11 @@
+<div class="main-layout">
+  <header class="header">
+    <div>{{ userEmail }}</div>
+    <button (click)="logout()">Déconnexion</button>
+  </header>
+
+  <main class="content">
+    <!-- Ici seront affichés les composants enfants comme TaskList -->
+    <router-outlet></router-outlet>
+  </main>
+</div>

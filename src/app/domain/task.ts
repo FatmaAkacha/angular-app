@@ -2,7 +2,7 @@ export interface Task {
 id: string;
 titre: string;
 description?: string;
-userEmail: string;
+userEmail?: string;
 priorite: number; 
 dueDate?: string; 
 completed: boolean;
